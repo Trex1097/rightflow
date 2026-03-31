@@ -35,13 +35,13 @@ const avatarText: Record<string, string> = {
 export default function PaiementsPage() {
   return (
     <AppShell activePage="paiements">
-      <div className="p-5 space-y-4">
+      <div className="p-4 md:p-5 space-y-4">
         <div className="flex items-center gap-3">
           <h1 className="text-sm font-bold">Paiements</h1>
           <span className="badge-blue">Cycles trimestriels</span>
         </div>
 
-        <div className="grid grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           <MetricCard label="Total Q3 2025" value="31 740" suffix=" MAD" valueColor="green" />
           <MetricCard label="Artistes à payer" value="47" delta="ce cycle" deltaColor="muted" />
           <MetricCard label="DA versés" value="17 240" suffix=" MAD" valueColor="green" />
@@ -49,7 +49,7 @@ export default function PaiementsPage() {
         </div>
 
         {/* Cycles */}
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           {CYCLES.map(cycle => (
             <div key={cycle.label} className={clsx('rf-card relative overflow-hidden', cycle.status === 'active' && 'border-[var(--rf-green)]')}>
               {cycle.status === 'active' && <div className="absolute top-0 left-0 right-0 h-0.5 bg-[var(--rf-green)]" />}
@@ -108,7 +108,7 @@ export default function PaiementsPage() {
         {/* Payment methods info */}
         <div className="rf-card">
           <div className="text-xs font-medium mb-3">Méthodes de reversement acceptées</div>
-          <div className="grid grid-cols-4 gap-2">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
             {['Virement bancaire (IBAN)', 'Orange Money', 'CIH Pay', 'Wave'].map(m => (
               <div key={m} className="p-2 bg-gray-50 rounded-lg text-center">
                 <div className="text-[11px] font-medium">{m}</div>

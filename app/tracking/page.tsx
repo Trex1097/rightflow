@@ -52,14 +52,14 @@ export default function TrackingPage() {
 
   return (
     <AppShell activePage="tracking">
-      <div className="p-5 space-y-4">
-        <div className="flex items-center gap-3">
+      <div className="p-4 md:p-5 space-y-4">
+        <div className="flex flex-wrap items-center gap-2">
           <h1 className="text-sm font-bold">Tracking</h1>
           <span className="badge-green flex items-center gap-1"><span className="pulse-dot" /> Live — 30s</span>
           <div className="flex gap-1 ml-auto">
             {TABS.map(tab => (
               <button key={tab} onClick={() => setActiveTab(tab)}
-                className={clsx('text-[11px] px-3 py-1 rounded-full border transition-colors', activeTab === tab ? 'bg-[var(--rf-green-light)] text-[var(--rf-green-text)] border-[var(--rf-green)]' : 'border-gray-200 text-gray-400')}
+                className={clsx('text-[11px] px-2 md:px-3 py-1 rounded-full border transition-colors', activeTab === tab ? 'bg-[var(--rf-green-light)] text-[var(--rf-green-text)] border-[var(--rf-green)]' : 'border-gray-200 text-gray-400')}
                 style={{ fontFamily: 'var(--font-dm-mono), monospace' }}>
                 {tab}
               </button>
@@ -67,14 +67,14 @@ export default function TrackingPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           <MetricCard label="Détections" value={tabMetrics[activeTab].det} delta="+18% vs hier" deltaColor="green" />
           <MetricCard label="Sources actives" value="23" delta="radio+stream+public" deltaColor="muted" />
           <MetricCard label="Droits générés" value={droits.toLocaleString('fr-FR')} suffix=" MAD" valueColor="green" delta="en cours de calcul" deltaColor="muted" />
           <MetricCard label="Oeuvres détectées" value="31" delta="sur 47 au catalogue" deltaColor="muted" />
         </div>
 
-        <div className="grid grid-cols-[1.3fr_1fr] gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-[1.3fr_1fr] gap-3">
           {/* Feed */}
           <div className="rf-card">
             <div className="flex items-center justify-between mb-3">

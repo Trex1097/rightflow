@@ -12,13 +12,13 @@ const RESERVE_ITEMS = [
 export default function AdminPage() {
   return (
     <AppShell activePage="admin">
-      <div className="p-5 space-y-4">
+      <div className="p-4 md:p-5 space-y-4">
         <div className="flex items-center gap-3">
           <h1 className="text-sm font-bold">Admin BMDA</h1>
           <span className="badge-purple">Vue institutionnelle</span>
         </div>
 
-        <div className="grid grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           <MetricCard label="Total collecté" value="1 240 000" suffix=" MAD" valueColor="purple" delta="2025 YTD" deltaColor="muted" admin />
           <MetricCard label="Artistes inscrits" value="1 847" delta="+312 ce mois" deltaColor="purple" admin />
           <MetricCard label="Fonds de réserve" value="42 180" suffix=" MAD" valueColor="purple" delta="247 oeuvres" deltaColor="muted" admin />
@@ -69,7 +69,7 @@ export default function AdminPage() {
         {/* Stats by source type */}
         <div className="rf-card">
           <div className="text-xs font-medium mb-3">Collecte par type de source — 2025 YTD</div>
-          <div className="grid grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {[
               { label: 'Streaming', amount: '742 000', pct: 60, color: 'var(--rf-green)' },
               { label: 'Radio', amount: '248 000', pct: 20, color: 'var(--rf-orange)' },
