@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { calculateReserveRedistribution } from '@/lib/rightsEngine'
 
+export const dynamic = 'force-dynamic'
+
 // GET /api/reserve — list reserve fund entries
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url)

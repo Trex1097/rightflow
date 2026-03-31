@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 
+export const dynamic = 'force-dynamic'
+
 // GET /api/cycles — list all payment cycles
 export async function GET() {
   const cycles = await prisma.paymentCycle.findMany({

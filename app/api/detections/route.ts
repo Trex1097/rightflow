@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { calculateRight } from '@/lib/rightsEngine'
 
+export const dynamic = 'force-dynamic'
+
 // POST /api/detections — called by IoT devices or ACRCloud webhook
 export async function POST(req: NextRequest) {
   try {
