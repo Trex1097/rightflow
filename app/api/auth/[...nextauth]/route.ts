@@ -49,18 +49,9 @@ const handler = NextAuth({
       return session
     },
   },
-  pages: {
-    signIn: '/login',
-  },
+  pages: { signIn: '/login' },
   session: { strategy: 'jwt' },
   secret: process.env.NEXTAUTH_SECRET,
 })
 
 export { handler as GET, handler as POST }
-```
-
-Sauvegarde, puis :
-```
-git add .
-git commit -m "fix nextauth route"
-git push origin main
