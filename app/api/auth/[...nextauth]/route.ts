@@ -13,20 +13,25 @@ const handler = NextAuth({
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) return null
-        const user = await prisma.user.findUnique({
-          where: { email: credentials.email },
-          include: { artist: true, label: true },
-        })
-        if (!user) return null
-        const valid = await bcrypt.compare(credentials.password, user.password)
-        if (!valid) return null
-        return {
-          id: user.id,
-          email: user.email,
-          name: user.name,
-          role: user.role,
-          artistId: user.artist?.id ?? null,
-          labelId: user.label?.id ?? null,
+        try {
+          const user = await prisma.user.findUnique({
+            where: { email: credentials.email },
+            include: { artist: true, label: true },
+          })
+          if (!user) return null
+          const valid = await bcrypt.compare(credentials.password, user.password)
+          if (!valid) return null
+          return {
+            id: user.id,
+            email: user.email,
+            name: user.name,
+            role: user.role,
+            artistId: user.artist?.id ?? null,
+            labelId: user.label?.id ?? null,
+          }
+        } catch (err) {
+          console.error('Auth error:', err)
+          return null
         }
       },
     }),
