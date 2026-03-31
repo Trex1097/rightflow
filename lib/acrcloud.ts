@@ -39,7 +39,7 @@ export async function identifyAudio(audioBuffer: Buffer): Promise<DetectionResul
     .digest('base64')
 
   const formData = new FormData()
-  formData.append('sample', new Blob([audioBuffer]))
+  formData.append('sample', new Blob([new Uint8Array(audioBuffer)]))
   formData.append('access_key', accessKey)
   formData.append('data_type', 'audio')
   formData.append('signature_version', '1')
