@@ -1,0 +1,46 @@
+{
+  "name": "rightflow",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "db:push": "prisma db push",
+    "db:seed": "npx ts-node prisma/seed.ts"
+  },
+  "dependencies": {
+    "next": "14.2.0",
+    "react": "^18",
+    "react-dom": "^18",
+    "@prisma/client": "^5.10.0",
+    "prisma": "^5.10.0",
+    "next-auth": "^4.24.7",
+    "recharts": "^2.12.0",
+    "clsx": "^2.1.0",
+    "date-fns": "^3.3.1",
+    "zustand": "^4.5.2",
+    "react-hot-toast": "^2.4.1",
+    "lucide-react": "^0.359.0",
+    "@tanstack/react-query": "^5.28.4",
+    "axios": "^1.6.8",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "typescript": "^5",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.6",
+    "tailwindcss": "^3.4.1",
+    "postcss": "^8",
+    "autoprefixer": "^10.0.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.0",
+    "ts-node": "^10.9.2"
+  }
+}

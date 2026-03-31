@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --rf-green: #1D9E75;
+    --rf-green-dark: #0F6E56;
+    --rf-green-light: #E1F5EE;
+    --rf-green-text: #085041;
+    --rf-purple: #534AB7;
+    --rf-purple-dark: #3C3489;
+    --rf-purple-light: #EEEDFE;
+    --rf-purple-text: #26215C;
+    --rf-orange: #D85A30;
+    --rf-orange-light: #FAECE7;
+    --rf-orange-text: #4A1B0C;
+    --rf-amber: #BA7517;
+    --rf-amber-light: #FAEEDA;
+    --rf-amber-text: #412402;
+    --rf-blue: #185FA5;
+    --rf-blue-light: #E6F1FB;
+    --rf-blue-text: #042C53;
+  }
+
+  * { box-sizing: border-box; }
+  
+  body {
+    font-family: var(--font-syne), sans-serif;
+    @apply bg-gray-50 text-gray-900;
+  }
+
+  .font-mono {
+    font-family: var(--font-dm-mono), monospace;
+  }
+}
+
+@layer components {
+  /* Cards */
+  .rf-card {
+    @apply bg-white border border-gray-100 rounded-xl p-4;
+  }
+
+  /* Metric cards */
+  .rf-metric {
+    @apply bg-white border border-gray-100 rounded-xl p-3;
+  }
+
+  /* Buttons */
+  .rf-btn-green {
+    @apply bg-[var(--rf-green-dark)] text-[var(--rf-green-light)] font-medium text-sm px-4 py-2 rounded-lg hover:bg-[var(--rf-green)] transition-colors;
+    font-family: var(--font-syne), sans-serif;
+  }
+
+  .rf-btn-purple {
+    @apply bg-[var(--rf-purple-dark)] text-[var(--rf-purple-light)] font-medium text-sm px-4 py-2 rounded-lg hover:bg-[var(--rf-purple)] transition-colors;
+    font-family: var(--font-syne), sans-serif;
+  }
+
+  .rf-btn-outline {
+    @apply border border-[var(--rf-purple)] text-[var(--rf-purple)] font-medium text-sm px-4 py-2 rounded-lg hover:bg-[var(--rf-purple-light)] transition-colors bg-transparent;
+    font-family: var(--font-syne), sans-serif;
+  }
+
+  /* Badges */
+  .badge-green { @apply bg-[var(--rf-green-light)] text-[var(--rf-green-text)] text-[10px] font-medium px-2 py-0.5 rounded-full; font-family: var(--font-dm-mono), monospace; }
+  .badge-purple { @apply bg-[var(--rf-purple-light)] text-[var(--rf-purple-text)] text-[10px] font-medium px-2 py-0.5 rounded-full; font-family: var(--font-dm-mono), monospace; }
+  .badge-amber { @apply bg-[var(--rf-amber-light)] text-[var(--rf-amber-text)] text-[10px] font-medium px-2 py-0.5 rounded-full; font-family: var(--font-dm-mono), monospace; }
+  .badge-blue { @apply bg-[var(--rf-blue-light)] text-[var(--rf-blue-text)] text-[10px] font-medium px-2 py-0.5 rounded-full; font-family: var(--font-dm-mono), monospace; }
+  .badge-orange { @apply bg-[var(--rf-orange-light)] text-[var(--rf-orange-text)] text-[10px] font-medium px-2 py-0.5 rounded-full; font-family: var(--font-dm-mono), monospace; }
+
+  /* Tags */
+  .tag-da { @apply bg-[var(--rf-green-light)] text-[var(--rf-green-text)] text-[8px] px-1 py-0.5 rounded; font-family: var(--font-dm-mono), monospace; }
+  .tag-dv { @apply bg-[var(--rf-purple-light)] text-[var(--rf-purple-text)] text-[8px] px-1 py-0.5 rounded; font-family: var(--font-dm-mono), monospace; }
+
+  /* Sidebar */
+  .sb-item {
+    @apply flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-gray-500 cursor-pointer transition-colors hover:bg-gray-50;
+    font-family: var(--font-syne), sans-serif;
+  }
+  .sb-item.active {
+    @apply bg-gray-50 border border-gray-100 text-gray-900;
+  }
+
+  /* Pill statuses */
+  .pill-active { @apply bg-[var(--rf-green-light)] text-[var(--rf-green-text)] text-[10px] font-medium px-2 py-0.5 rounded-full; font-family: var(--font-dm-mono), monospace; }
+  .pill-pending { @apply bg-[var(--rf-amber-light)] text-[var(--rf-amber-text)] text-[10px] font-medium px-2 py-0.5 rounded-full; font-family: var(--font-dm-mono), monospace; }
+  .pill-partial { @apply bg-[var(--rf-blue-light)] text-[var(--rf-blue-text)] text-[10px] font-medium px-2 py-0.5 rounded-full; font-family: var(--font-dm-mono), monospace; }
+
+  /* Pulse animation */
+  .pulse-dot {
+    @apply w-1.5 h-1.5 rounded-full bg-[var(--rf-green)] inline-block;
+    animation: pulse 2s ease-in-out infinite;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.4); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-feed { animation: fadeIn 0.3s ease; }
