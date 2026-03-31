@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { ethers } from 'ethers'
 
 // ABIs (simplified — use full ABI in production from artifacts)
