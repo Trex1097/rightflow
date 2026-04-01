@@ -54,13 +54,18 @@ export default function TrackingPage() {
     <AppShell activePage="tracking">
       <div className="p-4 md:p-5 space-y-4">
         <div className="flex flex-wrap items-center gap-2">
-          <h1 className="text-sm font-bold">Tracking</h1>
+          <h1 style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-primary)' }}>Tracking</h1>
           <span className="badge-green flex items-center gap-1"><span className="pulse-dot" /> Live — 30s</span>
           <div className="flex gap-1 ml-auto">
             {TABS.map(tab => (
               <button key={tab} onClick={() => setActiveTab(tab)}
-                className={clsx('text-[11px] px-2 md:px-3 py-1 rounded-full border transition-colors', activeTab === tab ? 'bg-[var(--rf-green-light)] text-[var(--rf-green-text)] border-[var(--rf-green)]' : 'border-gray-200 text-gray-400')}
-                style={{ fontFamily: 'var(--font-dm-mono), monospace' }}>
+                className="text-[11px] px-2 md:px-3 py-1 rounded-full border transition-colors"
+                style={{
+                  fontFamily: 'var(--font-dm-mono), monospace',
+                  background: activeTab === tab ? 'rgba(29,185,116,0.1)' : 'transparent',
+                  color: activeTab === tab ? 'var(--rf-green)' : 'var(--text-muted)',
+                  borderColor: activeTab === tab ? 'var(--rf-green)' : 'var(--card-border)',
+                }}>
                 {tab}
               </button>
             ))}
@@ -78,32 +83,37 @@ export default function TrackingPage() {
           {/* Feed */}
           <div className="rf-card">
             <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-medium">Flux de détections</span>
+              <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-primary)' }}>Flux de détections</span>
               <div className="flex gap-1">
                 {['all', 'radio', 'stream', 'public'].map(f => (
                   <button key={f} onClick={() => setFilter(f)}
-                    className={clsx('text-[10px] px-2 py-0.5 rounded-full border transition-colors', filter === f ? 'bg-[var(--rf-green-light)] text-[var(--rf-green-text)] border-[var(--rf-green)]' : 'border-gray-200 text-gray-400')}
-                    style={{ fontFamily: 'var(--font-dm-mono), monospace' }}>
+                    className="text-[10px] px-2 py-0.5 rounded-full border transition-colors"
+                    style={{
+                      fontFamily: 'var(--font-dm-mono), monospace',
+                      background: filter === f ? 'rgba(29,185,116,0.1)' : 'transparent',
+                      color: filter === f ? 'var(--rf-green)' : 'var(--text-muted)',
+                      borderColor: filter === f ? 'var(--rf-green)' : 'var(--card-border)',
+                    }}>
                     {f === 'all' ? 'Tout' : f.charAt(0).toUpperCase() + f.slice(1)}
                   </button>
                 ))}
               </div>
             </div>
-            <div className="space-y-0 divide-y divide-gray-50">
+            <div className="space-y-0" style={{ borderTop: '1px solid var(--card-border)' }}>
               {filtered.map((item, i) => (
-                <div key={i} className="flex items-center gap-2.5 py-2 animate-feed">
+                <div key={i} className="flex items-center gap-2.5 py-2.5 animate-feed" style={{ borderBottom: '1px solid var(--card-border)' }}>
                   <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: typeColor[item.type] }} />
                   <div className="flex-1 min-w-0">
-                    <div className="text-[11px] font-medium truncate flex items-center gap-1">
+                    <div className="text-[11px] font-medium truncate flex items-center gap-1" style={{ color: 'var(--text-primary)' }}>
                       {item.title}
                       {item.da && <span className="tag-da">DA</span>}
                       {item.dv && <span className="tag-dv">DV</span>}
                     </div>
-                    <div className="text-[9px] text-gray-400 mt-0.5" style={{ fontFamily: 'var(--font-dm-mono), monospace' }}>{item.meta}</div>
+                    <div className="text-[9px] mt-0.5" style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-dm-mono), monospace' }}>{item.meta}</div>
                   </div>
                   <div className="text-right flex-shrink-0">
-                    <div className="text-[11px] font-medium text-[var(--rf-green)]" style={{ fontFamily: 'var(--font-dm-mono), monospace' }}>{item.amount}</div>
-                    <div className="text-[9px] text-gray-400" style={{ fontFamily: 'var(--font-dm-mono), monospace' }}>il y a {item.time}</div>
+                    <div className="text-[11px] font-medium" style={{ color: 'var(--rf-green)', fontFamily: 'var(--font-dm-mono), monospace' }}>{item.amount}</div>
+                    <div className="text-[9px]" style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-dm-mono), monospace' }}>il y a {item.time}</div>
                   </div>
                 </div>
               ))}
@@ -112,19 +122,20 @@ export default function TrackingPage() {
 
           {/* Sources */}
           <div className="rf-card">
-            <div className="text-xs font-medium mb-3">Sources connectées</div>
+            <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-primary)', marginBottom: 12 }}>Sources connectées</div>
             <div className="space-y-2">
               {SOURCES.map(src => (
-                <div key={src.name} className="flex items-center gap-2.5 p-2 bg-gray-50 rounded-lg">
-                  <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: src.online ? 'var(--rf-green)' : '#d1d5db' }} />
+                <div key={src.name} className="flex items-center gap-2.5 p-2 rounded-lg"
+                  style={{ background: 'var(--input-bg)', border: '1px solid var(--card-border)' }}>
+                  <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: src.online ? 'var(--rf-green)' : '#4b5563' }} />
                   <div className="flex-1 min-w-0">
-                    <div className="text-[11px] font-medium">{src.name}</div>
-                    <div className={clsx('text-[9px] mt-0.5', src.online ? 'text-gray-400' : 'text-[var(--rf-orange)]')} style={{ fontFamily: 'var(--font-dm-mono), monospace' }}>
+                    <div className="text-[11px] font-medium" style={{ color: 'var(--text-primary)' }}>{src.name}</div>
+                    <div className="text-[9px] mt-0.5" style={{ color: src.online ? 'var(--text-muted)' : 'var(--rf-orange)', fontFamily: 'var(--font-dm-mono), monospace' }}>
                       {src.count} · {src.amount}
                     </div>
                   </div>
-                  <span className={clsx('text-[9px] flex items-center gap-1', src.online ? 'text-[var(--rf-green)]' : 'text-gray-400')} style={{ fontFamily: 'var(--font-dm-mono), monospace' }}>
-                    <span className="w-1.5 h-1.5 rounded-full" style={{ background: src.online ? 'var(--rf-green)' : '#d1d5db' }} />
+                  <span className="text-[9px] flex items-center gap-1" style={{ color: src.online ? 'var(--rf-green)' : 'var(--text-muted)', fontFamily: 'var(--font-dm-mono), monospace' }}>
+                    <span className="w-1.5 h-1.5 rounded-full" style={{ background: src.online ? 'var(--rf-green)' : '#4b5563' }} />
                     {src.online ? 'En ligne' : 'Offline'}
                   </span>
                 </div>

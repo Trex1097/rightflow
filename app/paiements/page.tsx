@@ -1,7 +1,6 @@
 'use client'
 import AppShell from '@/components/layout/AppShell'
 import MetricCard from '@/components/ui/MetricCard'
-import clsx from 'clsx'
 
 const CYCLES = [
   { label: 'Cycle en cours — Q3 2025', amount: '31 740', dates: '01 juil. → 30 sept. 2025', payDate: 'Versement auto. 01 oct. 2025', progress: 78, status: 'active' },
@@ -17,19 +16,19 @@ const PAYMENTS = [
   { initials: 'HA', name: 'Hatim Ammor', da: '1 200', dv: '640', works: 2, total: '1 840', status: 'scheduled' },
 ]
 
-const avatarColors: Record<string, string> = {
-  SL: 'var(--rf-green-light)',
-  DZ: 'var(--rf-purple-light)',
-  MZ: 'var(--rf-amber-light)',
-  RO: 'var(--rf-blue-light)',
-  HA: 'var(--rf-orange-light)',
+const avatarBg: Record<string, string> = {
+  SL: 'rgba(29,185,116,0.15)',
+  DZ: 'rgba(123,110,246,0.15)',
+  MZ: 'rgba(245,158,11,0.15)',
+  RO: 'rgba(59,130,246,0.15)',
+  HA: 'rgba(249,115,22,0.15)',
 }
-const avatarText: Record<string, string> = {
-  SL: 'var(--rf-green-text)',
+const avatarColor: Record<string, string> = {
+  SL: 'var(--rf-green)',
   DZ: 'var(--rf-purple-text)',
-  MZ: 'var(--rf-amber-text)',
-  RO: 'var(--rf-blue-text)',
-  HA: 'var(--rf-orange-text)',
+  MZ: 'var(--rf-amber)',
+  RO: '#60a5fa',
+  HA: 'var(--rf-orange)',
 }
 
 export default function PaiementsPage() {
@@ -37,7 +36,7 @@ export default function PaiementsPage() {
     <AppShell activePage="paiements">
       <div className="p-4 md:p-5 space-y-4">
         <div className="flex items-center gap-3">
-          <h1 className="text-sm font-bold">Paiements</h1>
+          <h1 style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-primary)' }}>Paiements</h1>
           <span className="badge-blue">Cycles trimestriels</span>
         </div>
 
@@ -51,22 +50,20 @@ export default function PaiementsPage() {
         {/* Cycles */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           {CYCLES.map(cycle => (
-            <div key={cycle.label} className={clsx('rf-card relative overflow-hidden', cycle.status === 'active' && 'border-[var(--rf-green)]')}>
-              {cycle.status === 'active' && <div className="absolute top-0 left-0 right-0 h-0.5 bg-[var(--rf-green)]" />}
-              <div className="text-[10px] font-medium text-gray-400 uppercase tracking-wider mb-1">{cycle.label}</div>
-              <div className={clsx('text-lg font-bold', cycle.status === 'active' ? 'text-[var(--rf-green)]' : cycle.status === 'done' ? 'text-gray-700' : 'text-gray-300')}
-                style={{ fontFamily: 'var(--font-dm-mono), monospace' }}>
+            <div key={cycle.label} className="rf-card relative overflow-hidden"
+              style={{ border: cycle.status === 'active' ? '1px solid rgba(29,185,116,0.3)' : undefined }}>
+              {cycle.status === 'active' && <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 2, background: 'var(--rf-green)', borderRadius: '16px 16px 0 0' }} />}
+              <div style={{ fontSize: 10, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--text-muted)', marginBottom: 4 }}>{cycle.label}</div>
+              <div style={{ fontSize: 18, fontWeight: 700, fontFamily: 'var(--font-dm-mono), monospace', color: cycle.status === 'active' ? 'var(--rf-green)' : cycle.status === 'done' ? 'var(--text-secondary)' : 'var(--text-muted)' }}>
                 {cycle.amount}{cycle.amount !== '—' && ' MAD'}
               </div>
-              <div className="text-[10px] text-gray-400 mt-0.5 mb-2" style={{ fontFamily: 'var(--font-dm-mono), monospace' }}>{cycle.dates}</div>
+              <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 2, marginBottom: 8, fontFamily: 'var(--font-dm-mono), monospace' }}>{cycle.dates}</div>
               {cycle.status !== 'upcoming' && (
-                <>
-                  <div className="h-1 bg-gray-100 rounded-full mb-1">
-                    <div className="h-full rounded-full" style={{ width: `${cycle.progress}%`, background: cycle.status === 'done' ? '#d1d5db' : 'var(--rf-green)' }} />
-                  </div>
-                </>
+                <div style={{ height: 4, borderRadius: 99, background: 'var(--bar-bg)', marginBottom: 4 }}>
+                  <div style={{ height: '100%', borderRadius: 99, width: `${cycle.progress}%`, background: cycle.status === 'done' ? 'var(--text-muted)' : 'var(--rf-green)' }} />
+                </div>
               )}
-              <div className={clsx('text-[9px] mt-1', cycle.status === 'done' ? 'text-[var(--rf-green)]' : 'text-gray-400')} style={{ fontFamily: 'var(--font-dm-mono), monospace' }}>
+              <div style={{ fontSize: 9, marginTop: 4, color: cycle.status === 'done' ? 'var(--rf-green)' : 'var(--text-muted)', fontFamily: 'var(--font-dm-mono), monospace' }}>
                 {cycle.status === 'done' && '✓ '}{cycle.payDate}
               </div>
             </div>
@@ -76,42 +73,44 @@ export default function PaiementsPage() {
         {/* Artists payments */}
         <div className="rf-card">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-medium">Reversements Q3 2025 — Artistes</span>
+            <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-primary)' }}>Reversements Q3 2025 — Artistes</span>
             <span className="badge-amber">En attente versement</span>
           </div>
           <div className="space-y-2">
             {PAYMENTS.map(p => (
-              <div key={p.name} className="flex items-center gap-3 p-2.5 bg-gray-50 rounded-lg">
+              <div key={p.name} className="flex items-center gap-3 p-2.5 rounded-lg"
+                style={{ background: 'var(--input-bg)', border: '1px solid var(--card-border)' }}>
                 <div className="w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-medium flex-shrink-0"
-                  style={{ background: avatarColors[p.initials], color: avatarText[p.initials] }}>
+                  style={{ background: avatarBg[p.initials], color: avatarColor[p.initials] }}>
                   {p.initials}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <div className="text-xs font-medium">{p.name}</div>
-                  <div className="text-[10px] text-gray-400 mt-0.5" style={{ fontFamily: 'var(--font-dm-mono), monospace' }}>
-                    DA: {p.da} MAD · <span style={{ color: 'var(--rf-purple)' }}>DV: {p.dv} MAD</span> · {p.works} oeuvre{p.works > 1 ? 's' : ''}
+                  <div style={{ fontSize: 12, fontWeight: 500, color: 'var(--text-primary)' }}>{p.name}</div>
+                  <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 2, fontFamily: 'var(--font-dm-mono), monospace' }}>
+                    DA: {p.da} MAD · <span style={{ color: 'var(--rf-purple-text)' }}>DV: {p.dv} MAD</span> · {p.works} oeuvre{p.works > 1 ? 's' : ''}
                   </div>
                 </div>
                 <div className="text-right flex-shrink-0">
-                  <div className="text-sm font-bold text-[var(--rf-green)]" style={{ fontFamily: 'var(--font-dm-mono), monospace' }}>{p.total} MAD</div>
+                  <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--rf-green)', fontFamily: 'var(--font-dm-mono), monospace' }}>{p.total} MAD</div>
                   <span className="badge-amber" style={{ fontSize: '9px' }}>01 oct.</span>
                 </div>
               </div>
             ))}
           </div>
-          <div className="border-t border-gray-100 mt-3 pt-3 flex justify-between items-center">
-            <div className="text-xs text-gray-400">Total Q3 2025 · DA + DV · 47 artistes</div>
-            <div className="text-base font-bold text-[var(--rf-green)]" style={{ fontFamily: 'var(--font-dm-mono), monospace' }}>31 740 MAD</div>
+          <div style={{ borderTop: '1px solid var(--card-border)', marginTop: 12, paddingTop: 12, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ fontSize: 11, color: 'var(--text-muted)' }}>Total Q3 2025 · DA + DV · 47 artistes</div>
+            <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--rf-green)', fontFamily: 'var(--font-dm-mono), monospace' }}>31 740 MAD</div>
           </div>
         </div>
 
         {/* Payment methods info */}
         <div className="rf-card">
-          <div className="text-xs font-medium mb-3">Méthodes de reversement acceptées</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-primary)', marginBottom: 12 }}>Méthodes de reversement acceptées</div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
             {['Virement bancaire (IBAN)', 'Orange Money', 'CIH Pay', 'Wave'].map(m => (
-              <div key={m} className="p-2 bg-gray-50 rounded-lg text-center">
-                <div className="text-[11px] font-medium">{m}</div>
+              <div key={m} className="p-2 rounded-lg text-center"
+                style={{ background: 'var(--input-bg)', border: '1px solid var(--card-border)' }}>
+                <div style={{ fontSize: 11, fontWeight: 500, color: 'var(--text-primary)', marginBottom: 4 }}>{m}</div>
                 <span className="badge-green" style={{ fontSize: '9px' }}>Actif</span>
               </div>
             ))}

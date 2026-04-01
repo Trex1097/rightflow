@@ -131,7 +131,7 @@ export default function AppShell({ children, activePage }: AppShellProps) {
         </aside>
 
         {/* Main content */}
-        <main className="flex-1 overflow-y-auto pb-16 md:pb-0" style={{ background: '#F5F6F8' }}>
+        <main className="flex-1 overflow-y-auto pb-16 md:pb-0" style={{ background: 'var(--content-bg)' }}>
           {children}
         </main>
       </div>

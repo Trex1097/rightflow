@@ -6,124 +6,141 @@
   :root {
     --rf-green: #1DB974;
     --rf-green-dark: #158a55;
-    --rf-green-light: #e8f8ef;
-    --rf-green-text: #0a4a2e;
+    --rf-green-light: rgba(29,185,116,0.12);
+    --rf-green-text: #4ade80;
     --rf-purple: #7B6EF6;
     --rf-purple-dark: #5a4fd4;
-    --rf-purple-light: #EEEDFE;
-    --rf-purple-text: #26215C;
+    --rf-purple-light: rgba(123,110,246,0.12);
+    --rf-purple-text: #a78bfa;
     --rf-orange: #F97316;
-    --rf-orange-light: #FEF0E7;
-    --rf-orange-text: #7c2d12;
+    --rf-orange-light: rgba(249,115,22,0.12);
+    --rf-orange-text: #fb923c;
     --rf-amber: #F59E0B;
-    --rf-amber-light: #FEF3C7;
-    --rf-amber-text: #78350f;
+    --rf-amber-light: rgba(245,158,11,0.12);
+    --rf-amber-text: #fbbf24;
     --rf-blue: #3B82F6;
-    --rf-blue-light: #EFF6FF;
-    --rf-blue-text: #1e3a5f;
+    --rf-blue-light: rgba(59,130,246,0.12);
+    --rf-blue-text: #60a5fa;
 
     --nav-bg: #0D0D0D;
     --nav-border: #1C1C1C;
     --nav-text: #6b7280;
     --nav-text-active: #ffffff;
     --nav-active-bg: rgba(29, 185, 116, 0.08);
+
+    --content-bg: #111111;
+    --card-bg: #181818;
+    --card-border: #242424;
+    --card-hover: #1E1E1E;
+    --input-bg: #1C1C1C;
+    --input-border: #2A2A2A;
+    --text-primary: #F3F4F6;
+    --text-secondary: #9CA3AF;
+    --text-muted: #4B5563;
+    --bar-bg: #252525;
   }
 
   * { box-sizing: border-box; }
 
   body {
     font-family: var(--font-syne), sans-serif;
-    @apply bg-[#F5F6F8] text-gray-900;
+    background: var(--content-bg);
+    color: var(--text-primary);
   }
 }
 
 @layer components {
-  /* Cards */
   .rf-card {
-    @apply bg-white rounded-2xl p-4;
-    border: 1px solid #EAECEF;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.03);
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 1rem;
   }
 
-  .rf-card-dark {
-    @apply rounded-2xl p-4;
-    background: #111111;
-    border: 1px solid #1C1C1C;
-  }
-
-  /* Metric cards */
   .rf-metric {
-    @apply bg-white rounded-2xl p-4 relative overflow-hidden;
-    border: 1px solid #EAECEF;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 1rem;
+    position: relative;
+    overflow: hidden;
   }
 
-  /* Buttons */
   .rf-btn-green {
-    @apply font-semibold text-sm px-4 py-2 rounded-xl transition-all;
+    font-weight: 600;
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    transition: all 0.15s;
     background: var(--rf-green);
-    color: white;
+    color: #0D0D0D;
     font-family: var(--font-syne), sans-serif;
+    border: none;
+    cursor: pointer;
   }
-  .rf-btn-green:hover { background: var(--rf-green-dark); }
+  .rf-btn-green:hover { opacity: 0.85; }
 
   .rf-btn-purple {
-    @apply font-semibold text-sm px-4 py-2 rounded-xl transition-all;
+    font-weight: 600;
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    transition: all 0.15s;
     background: var(--rf-purple);
     color: white;
     font-family: var(--font-syne), sans-serif;
+    border: none;
+    cursor: pointer;
   }
-  .rf-btn-purple:hover { background: var(--rf-purple-dark); }
+  .rf-btn-purple:hover { opacity: 0.85; }
 
   .rf-btn-outline {
-    @apply border font-semibold text-sm px-4 py-2 rounded-xl bg-transparent transition-all;
-    border-color: #EAECEF;
-    color: #374151;
+    font-weight: 600;
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    transition: all 0.15s;
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--card-border);
     font-family: var(--font-syne), sans-serif;
+    cursor: pointer;
   }
-  .rf-btn-outline:hover { background: #F5F6F8; }
+  .rf-btn-outline:hover { background: var(--card-hover); color: var(--text-primary); }
 
-  /* Badges */
-  .badge-green  { @apply inline-flex items-center text-[10px] font-semibold px-2 py-0.5 rounded-full; background: var(--rf-green-light); color: var(--rf-green-text); font-family: var(--font-dm-mono), monospace; }
-  .badge-purple { @apply inline-flex items-center text-[10px] font-semibold px-2 py-0.5 rounded-full; background: var(--rf-purple-light); color: var(--rf-purple-text); font-family: var(--font-dm-mono), monospace; }
-  .badge-amber  { @apply inline-flex items-center text-[10px] font-semibold px-2 py-0.5 rounded-full; background: var(--rf-amber-light); color: var(--rf-amber-text); font-family: var(--font-dm-mono), monospace; }
-  .badge-blue   { @apply inline-flex items-center text-[10px] font-semibold px-2 py-0.5 rounded-full; background: var(--rf-blue-light); color: var(--rf-blue-text); font-family: var(--font-dm-mono), monospace; }
-  .badge-orange { @apply inline-flex items-center text-[10px] font-semibold px-2 py-0.5 rounded-full; background: var(--rf-orange-light); color: var(--rf-orange-text); font-family: var(--font-dm-mono), monospace; }
-  .badge-dark   { @apply inline-flex items-center text-[10px] font-semibold px-2 py-0.5 rounded-full; background: #1C1C1C; color: #9CA3AF; font-family: var(--font-dm-mono), monospace; }
+  .badge-green  { display: inline-flex; align-items: center; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 9999px; background: var(--rf-green-light); color: var(--rf-green-text); font-family: var(--font-dm-mono), monospace; }
+  .badge-purple { display: inline-flex; align-items: center; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 9999px; background: var(--rf-purple-light); color: var(--rf-purple-text); font-family: var(--font-dm-mono), monospace; }
+  .badge-amber  { display: inline-flex; align-items: center; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 9999px; background: var(--rf-amber-light); color: var(--rf-amber-text); font-family: var(--font-dm-mono), monospace; }
+  .badge-blue   { display: inline-flex; align-items: center; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 9999px; background: var(--rf-blue-light); color: var(--rf-blue-text); font-family: var(--font-dm-mono), monospace; }
+  .badge-orange { display: inline-flex; align-items: center; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 9999px; background: var(--rf-orange-light); color: var(--rf-orange-text); font-family: var(--font-dm-mono), monospace; }
+  .badge-dark   { display: inline-flex; align-items: center; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 9999px; background: #222; color: #6b7280; font-family: var(--font-dm-mono), monospace; }
 
-  /* Tags */
-  .tag-da { @apply inline-block text-[8px] font-bold px-1.5 py-0.5 rounded-md; background: var(--rf-green-light); color: var(--rf-green-text); font-family: var(--font-dm-mono), monospace; }
-  .tag-dv { @apply inline-block text-[8px] font-bold px-1.5 py-0.5 rounded-md; background: var(--rf-purple-light); color: var(--rf-purple-text); font-family: var(--font-dm-mono), monospace; }
+  .tag-da { display: inline-block; font-size: 8px; font-weight: 700; padding: 2px 5px; border-radius: 5px; background: var(--rf-green-light); color: var(--rf-green-text); font-family: var(--font-dm-mono), monospace; }
+  .tag-dv { display: inline-block; font-size: 8px; font-weight: 700; padding: 2px 5px; border-radius: 5px; background: var(--rf-purple-light); color: var(--rf-purple-text); font-family: var(--font-dm-mono), monospace; }
 
-  /* Sidebar */
   .sb-item {
-    @apply flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm font-medium cursor-pointer transition-all;
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 12px; border-radius: 10px;
+    font-size: 0.875rem; font-weight: 500;
+    cursor: pointer; transition: all 0.15s;
     color: var(--nav-text);
     font-family: var(--font-syne), sans-serif;
+    text-decoration: none;
   }
-  .sb-item:hover {
-    color: #e5e7eb;
-    background: rgba(255,255,255,0.05);
-  }
+  .sb-item:hover { color: #e5e7eb; background: rgba(255,255,255,0.04); }
   .sb-item.active {
     color: var(--nav-text-active);
     background: var(--nav-active-bg);
     border-left: 2px solid var(--rf-green);
-    padding-left: calc(0.75rem - 2px);
+    padding-left: calc(12px - 2px);
   }
 
-  /* Pill statuses */
-  .pill-active  { @apply inline-flex items-center text-[10px] font-semibold px-2.5 py-0.5 rounded-full; background: var(--rf-green-light); color: var(--rf-green-text); font-family: var(--font-dm-mono), monospace; }
-  .pill-pending { @apply inline-flex items-center text-[10px] font-semibold px-2.5 py-0.5 rounded-full; background: var(--rf-amber-light); color: var(--rf-amber-text); font-family: var(--font-dm-mono), monospace; }
-  .pill-partial { @apply inline-flex items-center text-[10px] font-semibold px-2.5 py-0.5 rounded-full; background: var(--rf-blue-light); color: var(--rf-blue-text); font-family: var(--font-dm-mono), monospace; }
+  .pill-active  { display: inline-flex; align-items: center; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 9999px; background: var(--rf-green-light); color: var(--rf-green-text); font-family: var(--font-dm-mono), monospace; }
+  .pill-pending { display: inline-flex; align-items: center; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 9999px; background: var(--rf-amber-light); color: var(--rf-amber-text); font-family: var(--font-dm-mono), monospace; }
+  .pill-partial { display: inline-flex; align-items: center; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 9999px; background: var(--rf-blue-light); color: var(--rf-blue-text); font-family: var(--font-dm-mono), monospace; }
 
-  /* Progress bar */
-  .rf-bar { @apply h-1.5 rounded-full bg-[#F0F1F3]; }
-  .rf-bar-fill { @apply h-full rounded-full transition-all duration-500; }
-
-  /* Pulse animation */
   .pulse-dot {
-    @apply w-1.5 h-1.5 rounded-full inline-block;
+    display: inline-block; width: 6px; height: 6px; border-radius: 50%;
     background: var(--rf-green);
     animation: pulse 2s ease-in-out infinite;
   }
@@ -133,16 +150,8 @@
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.4; transform: scale(1.5); }
 }
-
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-6px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
 .animate-feed { animation: fadeIn 0.25s ease; }
-.animate-up { animation: slideUp 0.3s ease; }
